@@ -1,0 +1,27 @@
+name: Build and Check Spring Boot Application
+'on':
+  push:
+    branches:
+      - master
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Maven
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: temurin
+      - name: Build application
+        run: |
+          mvn clean package
+      - name: Check build status
+        if: '${{ failure() }}'
+        run: |
+          echo "Something went wrong during the build process."
+          exit 1
+      - name: Build successful
+        if: '${{ success() }}'
+        run: |
+          echo "Everything looks good! The build completed successfully."
