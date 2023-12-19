@@ -61,16 +61,13 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<version>3.2.0</version>
+				<configuration>
+					<jvmArguments>-Dspring.application.admin.enabled=true</jvmArguments>
+				</configuration>
 				<executions>
 					<execution>
-						<id>pre-integration-test</id>
 						<goals>
 							<goal>start</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>post-integration-test</id>
-						<goals>
 							<goal>stop</goal>
 						</goals>
 					</execution>
@@ -82,21 +79,20 @@
 				<version>1.4</version>
 				<executions>
 					<execution>
-						<phase>integration-test</phase>
+						<id>integration-test</id>
 						<goals>
 							<goal>generate</goal>
 						</goals>
 					</execution>
 				</executions>
 				<configuration>
-					<apiDocsUrl>http://localhost:9001/v3/api-docs</apiDocsUrl>
 					<outputFileName>openapi.json</outputFileName>
 					<outputDir>${project.basedir}/swagger-doc</outputDir>
 				</configuration>
 			</plugin>
 
 		</plugins>
-
 	</build>
+
 
 </project>
