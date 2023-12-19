@@ -24,4 +24,7 @@ jobs:
       - name: Build successful
         if: '${{ success() }}'
         run: |
-          echo "Everything looks good! The build completed successfully."
+          git add "${project.basedir}/swagger-doc/openapi.json"
+          git commit -m "Add OpenAPI documentation"
+          git push origin ${{ github.sha }}
+          
