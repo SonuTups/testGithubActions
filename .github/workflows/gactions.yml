@@ -15,7 +15,7 @@ jobs:
           distribution: temurin
       - name: Build application
         run: |
-          mvn -f test/pom.xml clean package -X
+          mvn clean install -B -f test/pom.xml
       - name: Check build status
         if: '${{ failure() }}'
         run: |
